@@ -40,3 +40,7 @@ BEGIN
     CLOSE cur_youtubers;
 END;
 $$
+
+--1.3 Faça uma pesquisa sobre o anti-pattern chamado RBAR - Row By Agonizing Row. Explique com suas palavras do que se trata.
+-- RBAR, sigla para “Row By Agonizing Row”, é um anti-padrão comum em bancos de dados relacionais, especialmente quando se utiliza SQL de forma procedural - prática de processar registros um a um, geralmente dentro de loops, ao invés de utilizar operações em conjunto. 
+-- O principal problema do RBAR é o impacto negativo no desempenho, principalmente em tabelas grandes. Quando cada linha é tratada individualmente, o banco de dados realiza muito mais operações internas, o que resulta em tempo de execução maior, maior uso de recursos e maior complexidade no código. Apesar disso, há situações específicas em que o RBAR pode ser necessário, como em processos que exigem lógica muito específica ou tratamento linha a linha, mas esses casos são exceções. O uso preferencial deve ser sempre por abordagens set-based, nas quais se consegue aplicar uma mesma operação a várias linhas com um único comando SQL, aproveitando a verdadeira força dos bancos relacionais.
