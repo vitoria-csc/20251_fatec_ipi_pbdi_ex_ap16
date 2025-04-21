@@ -1,0 +1,18 @@
+-- 1.1 Escreva um cursor que exiba as variáveis rank e youtuber de toda tupla que tiver video_count pelo menos igual a 1000 e cuja category seja igual a Sports ou Music.
+
+DO $$
+DECLARE
+	cur_sports_music_maior1000 CURSOR FOR SELECT rank, youtuber FROM tb_top_youtubers WHERE video_count >= 1000;
+	tupla RECORD;
+	resultado TEXT DEFAULT '';
+BEGIN
+	OPEN cur_sports_music_maior1000;
+	FETCH cur_sports_music_maior1000 INTO tupla;
+	WHILE FOUND LOOP
+		resultado := resultado || tupla.rank || ':' || tupla.youtuber || ',';
+		FETCH cur_sports_music_maior1000 INTO tupla;
+	END LOOP;
+	CLOSE cur_sports_music_maior1000;
+	RAISE NOTICE '%', resultado;
+END;
+$$
